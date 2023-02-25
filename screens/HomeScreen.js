@@ -5,25 +5,13 @@ const HomeScreen = () => {
   const [textInput, SetText] = useState("");
   const [data, setData] = useState([]);
   const [loading, SetLoading] = useState(true);
-  const handleTextSubmit = () => {
-    const URL =
-    `https://api.edamam.com/api/recipes/v2?type=public&q=${textInput}&app_id=ed925693&app_key=93f5a31f0f66825a0a45b9f258ff29f8`;
-    console.log(textInput);
-    fetch(URL)
-      .then(resp => resp.json())
-      .then(json => {
-        setData(json);
-      })
-      .catch(error => {
-        console.error(error);
-        throw error;
-      })
-      .finally(() => SetLoading(false));
-
-     // console.log(data);
-
-      data.hits.map((item)=>{console.log(item.recipe.label)});
-  };
+  async function handleTextSubmit() {
+    const URL = `https://api.edamam.com/api/recipes/v2?type=public&q=${textInput}&app_id=ed925693&app_key=93f5a31f0f66825a0a45b9f258ff29f8`;
+    let resp = await fetch(URL);
+    d = await resp.json();
+    console.log(d)
+    setData(d.hits);
+  }
 
   return (
     <View>
@@ -32,10 +20,12 @@ const HomeScreen = () => {
         onChangeText={curr_text => {
           SetText(curr_text);
         }}
-        onEndEditing={handleTextSubmit}
+        onEndEditing={() => handleTextSubmit()}
         defaultValue={textInput}
       ></TextInput>
-      
+      {data.map(x => {
+          return <Text>{x.recipe.label}</Text>
+      })}
     </View>
   );
 };
