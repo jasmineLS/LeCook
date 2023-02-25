@@ -1,7 +1,7 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, View, FlatList,Image} from "react-native";
 import { useState } from "react";
 
-const HomeScreen = () => {
+const RecipesScreen = () => {
   const [textInput, SetText] = useState("");
   const [data, setData] = useState([]);
   const [loading, SetLoading] = useState(true);
@@ -13,6 +13,12 @@ const HomeScreen = () => {
     setData(d.hits);
   }
 
+  const Recipe = ({recipe}) =>(
+      <View>
+          <Text>{recipe.label}</Text>
+      </View>
+  );
+
   return (
     <View>
       <TextInput
@@ -23,9 +29,9 @@ const HomeScreen = () => {
         onEndEditing={() => handleTextSubmit()}
         defaultValue={textInput}
       ></TextInput>
-      {data.map(x => {
-          return <Text>{x.recipe.label}</Text>
-      })}
+      <FlatList data={data}
+          renderItem={({item})=><Recipe recipe={item.recipe}/>}
+      /> 
     </View>
   );
 };
@@ -39,4 +45,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HomeScreen;
+export default RecipesScreen;
