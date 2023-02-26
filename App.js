@@ -12,14 +12,20 @@ export default function App() {
   const [savedItems, setSavedItems] = useState([]);
 
   const updateSaved = item => {
-    setSavedItems([...savedItems, item]);
+    setSavedItems([...savedItems, {item, id: Math.random() * 100}]);
     console.log(item)
   };
+
+  const removeItem = (id) =>{
+    setSavedItems(savedItems.filter(i=>i.id !== id))
+    console.log(savedItems.length);
+  }
 
   const context = {
     savedItems: savedItems,
     setSavedItems,
-    updateSaved
+    updateSaved,
+    removeItem
   };
   return (
     <AppContext.Provider value={context}>
