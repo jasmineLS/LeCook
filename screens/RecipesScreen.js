@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View, FlatList,Image} from "react-native";
+import { StyleSheet, Text, TextInput, View, FlatList,Image, Linking} from "react-native";
 import { useState } from "react";
 
 const RecipesScreen = () => {
@@ -14,13 +14,14 @@ const RecipesScreen = () => {
   }
 
   const Recipe = ({recipe}) =>(
-      <View>
-          <Text>{recipe.label}</Text>
+      <View style ={styles.box}>
+          <Image source={{uri:recipe.image}}style={{"width":100,"height":100}}/>
+          <Text onPress={() => {Linking.openURL(recipe.url)}}>{recipe.label}</Text>
       </View>
   );
 
   return (
-    <View>
+    <View style ={styles.body}>
       <TextInput
         style={styles.input}
         onChangeText={curr_text => {
@@ -29,9 +30,11 @@ const RecipesScreen = () => {
         onEndEditing={() => handleTextSubmit()}
         defaultValue={textInput}
       ></TextInput>
+      <View style={styles.lists}>
       <FlatList data={data}
           renderItem={({item})=><Recipe recipe={item.recipe}/>}
       /> 
+      </View>
     </View>
   );
 };
@@ -39,10 +42,31 @@ const RecipesScreen = () => {
 const styles = StyleSheet.create({
   input: {
     height: 40,
-    margin: 12,
+    margin: 20,
     borderWidth: 1,
-    padding: 10
+    padding: 10,
+    color:'#fff',
+    borderWidth: 4,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  } ,
+  body:{
+    backgroundColor:'#6b8e23',
+    flex:1,
+  } ,
+  lists:{
+    color:'#fff',
+    padding: 10,
+    height: 600,
+    margin: 10,
+  } ,
+  box:{
+    padding: 5,
+    borderWidth: 3,
   }
+  
+  
+
 });
 
 export default RecipesScreen;
