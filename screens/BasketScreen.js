@@ -13,20 +13,27 @@ const BasketScreen = ({navigation }) => {
   const [basket, setBasket] = useState([]);
   const handleTextSubmit = () => {
     setBasket([...basket, enteredText]);
+    setText("");
   };
+
   const PantryItem = item => {
     return (
       <View>
         <Text>{item.item}</Text>
+        <Pressable onPress={() => setBasket(basket.filter(i => i !== item.item))}>
+        <Text>Remove</Text>
+        </Pressable>
       </View>
     );
   };
+
 
   return (
     <View>
       <TextInput
         style={styles.input}
         onChangeText={curr_text => setText(curr_text)}
+        value={enteredText}
         onEndEditing={handleTextSubmit}
       ></TextInput>
       <FlatList
