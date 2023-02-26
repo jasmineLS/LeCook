@@ -15,7 +15,7 @@ const RecipesScreen = () => {
 
   const Recipe = ({recipe}) =>(
       <View style ={styles.box}>
-          <Image source={{uri:recipe.image}}style={{"width":100,"height":100}}/>
+          <Image source={{uri:recipe.image}}style={{"width":200,"height":100}}/>
           <Text onPress={() => {Linking.openURL(recipe.url)}}>{recipe.label}</Text>
       </View>
   );
@@ -41,6 +41,7 @@ const RecipesScreen = () => {
 
 const styles = StyleSheet.create({
   input: {
+    fontSize: 20,
     height: 40,
     margin: 20,
     borderWidth: 1,
@@ -59,10 +60,14 @@ const styles = StyleSheet.create({
     padding: 10,
     height: 600,
     margin: 10,
+   
   } ,
   box:{
     padding: 5,
     borderWidth: 3,
+    alignItems: "center",
+    fontSize: 40
+    
   }
   
   
