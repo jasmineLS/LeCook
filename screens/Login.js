@@ -12,8 +12,8 @@ const Login = ({navigation}) =>{
             <TextInput style={styles.TextInput} placeholder=" Username" value={username} onChange={(event)=>{setUsername(event.target.value)}}/>
             <TextInput style={styles.TextInput} placeholder=" Password" value={password} onChange={(event)=>{setPassword(event.target.value)}}/>
             <Pressable style={styles.Button} color='000000' onPress={()=>{
-                navigation.navigate("BasketStackScreen")
-            }}><Text style={{color:"white"}}>Submit</Text></Pressable>
+                navigation.navigate("Root")
+            }}><Text>Submit</Text></Pressable>
         </View>
     )
 }

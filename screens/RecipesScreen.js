@@ -1,7 +1,10 @@
-import { StyleSheet, Text, TextInput, View, FlatList,Image, Linking} from "react-native";
+import { StyleSheet, Text, TextInput, View, FlatList,Image, Linking, Pressable} from "react-native";
 import { useState, useEffect } from "react";
+import {useContext} from "react";
+import AppContext from '../AppContext';
 
 const RecipesScreen = ({route, navigation}) => {
+  const myContext = useContext(AppContext);
   const {basket} = route.params;
   const [textInput, SetText] = useState("");
   const [data, setData] = useState([]);
@@ -21,6 +24,10 @@ const RecipesScreen = ({route, navigation}) => {
   useEffect(() => {
     findRecipe()
   }, [])
+
+  const handleSaveItem = ()=>{
+
+  }
 
   const Recipe = ({recipe}) =>(
       <View style ={styles.box}>
