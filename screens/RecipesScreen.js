@@ -32,9 +32,9 @@ const RecipesScreen = ({route, navigation}) => {
   return (
     <View style ={styles.body}>
       <View style={styles.lists}>
-      <FlatList data={data}
+      {data.length>0?<FlatList data={data}
           renderItem={({item})=><Recipe recipe={item.recipe}/>}
-      /> 
+      />:<Text>No found Recipes</Text>} 
       </View>
     </View>
   );
