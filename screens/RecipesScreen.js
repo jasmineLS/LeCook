@@ -37,7 +37,7 @@ const RecipesScreen = ({route, navigation}) => {
       <View style ={styles.box}>
         <Image source={{uri:recipe.image}}style={{"width":100,"height":100, borderRadius:10}}/>
         <Text style={{color:'white', fontSize:20, marginLeft:10, width:200,}} onPress={() => {Linking.openURL(recipe.url)}}>{recipe.label}</Text> 
-        <Text style={{color:"white", fontSize:30, marginLeft:20}} onPress={()=>{myContext.updateSaved(JSON.stringify(recipe)); alert("Saved")}}>+</Text>
+        <Text style={{color:"white", fontSize:30, marginLeft:10}} onPress={()=>{myContext.updateSaved(JSON.stringify(recipe)); alert("Saved")}}>+</Text>
       </View>
 
   );
