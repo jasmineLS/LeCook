@@ -13,7 +13,7 @@ const Login = ({navigation}) =>{
             <TextInput style={styles.TextInput} placeholder=" Password" value={password} onChange={(event)=>{setPassword(event.target.value)}}/>
             <Pressable style={styles.Button} color='000000' onPress={()=>{
                 navigation.navigate("BasketStackScreen")
-            }}><Text>Submit</Text></Pressable>
+            }}><Text style={{color:"white"}}>Submit</Text></Pressable>
         </View>
     )
 }
@@ -26,11 +26,13 @@ const styles=StyleSheet.create({
     },
     TextInput:{
         height:60,
-        borderColor:'#CCD5AE',
+        borderColor:'black',
         borderWidth:2,
         width:300,
         margin:10,
-        color:'#000'
+        color:'#000',
+        borderRadius:10,
+        padding:10,
     },
     Text:{
         fontSize:33,
@@ -40,10 +42,14 @@ const styles=StyleSheet.create({
     Button:{
         paddingVertical:12,
         paddingHorizontal:32,
-        borderRadius:0,
+        borderRadius:8,
+        elevation:3,
+        width:300,
+        justifyContent:'center',
+        alignItems:'center',
         margin:30,
-        backgroundColor:'#CCD5AE',
-        borderColor:'#606C38',
+        backgroundColor:'black',
+        color:'white',
         borderWidth:1,
     },
 });

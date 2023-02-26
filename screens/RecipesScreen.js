@@ -24,16 +24,17 @@ const RecipesScreen = ({route, navigation}) => {
 
   const Recipe = ({recipe}) =>(
       <View style ={styles.box}>
-          <Image source={{uri:recipe.image}}style={{"width":200,"height":100}}/>
-          <Text onPress={() => {Linking.openURL(recipe.url)}}>{recipe.label}</Text>
+        <Image source={{uri:recipe.image}}style={{"width":100,"height":100, borderRadius:10}}/>
+        <Text style={{color:'white', fontSize:20, marginLeft:10, width:200}} onPress={() => {Linking.openURL(recipe.url)}}>{recipe.label}</Text> 
+        <Text style={{color:"white", fontSize:30}}>+</Text>
       </View>
   );
 
   return (
     <View style ={styles.body}>
       <View style={styles.lists}>
-      {data.length>0?<FlatList data={data}
-          renderItem={({item})=><Recipe recipe={item.recipe}/>}
+      {data.length>0?<FlatList data={data} style={{flex:1, alignSelf:'stretch', height:600}}
+          renderItem={({item})=><Recipe recipe={item.recipe} style={{flex:1, height:600}}/>}
       />:<Text style ={styles.denied}>No found Recipes</Text>} 
       </View>
     </View>
@@ -53,8 +54,9 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
   } ,
   body:{
-    backgroundColor:'#6b8e23',
-    flex:1,
+    backgroundColor:'white',
+    flex:2,
+    height: 600,
   } ,
   lists:{
     color:'#fff',
@@ -66,15 +68,14 @@ const styles = StyleSheet.create({
   box:{
     padding: 5,
     borderWidth: 3,
-    alignItems: "center",
-    fontSize: 40
-    
+    borderRadius: 10,
+    flexDirection: 'row',
+    fontSize: 40,
+    height: 120,
+    backgroundColor:'black',
+    margin: 10,
+    alignContent: 'center',
   },
-  
-  
-  
-  
-
 });
 
 export default RecipesScreen;
