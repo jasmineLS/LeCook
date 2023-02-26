@@ -21,7 +21,7 @@ const BasketScreen = ({navigation }) => {
       <View>
         <Text>{item.item}</Text>
         <Pressable onPress={() => setBasket(basket.filter(i => i !== item.item))}>
-        <Text>Remove</Text>
+        <Text style={styles.delete}>Remove</Text>
         </Pressable>
       </View>
     );
@@ -55,30 +55,42 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     margin: 12,
-    borderWidth: 1,
+    borderWidth: 2,
     padding: 10,
     color:'#fff',
+
     
   },
   body:{
     backgroundColor:'#6b8e23',
     color:'#fff',
     flex:1,
+    
   } ,
   texts: {
     textAlign: "center",
     backgroundColor:'#6b8e23',
     color:'#ffa500',
     fontSize:30,
-    padding: 10,
-    borderWidth: 5,
+    borderWidth: 2,
   },
   list:{
     color:'#fff',
     height: 40,
     margin: 2,
     padding: 2,
+    borderWidth: 2
 
+  },
+  delete:{
+  backgroundColor:'#6b8e23',
+  color:'#fff',
+  fontSize:20,
+  padding: 10,
+  borderWidth: 2,
+  flex:1,
+  alignSelf: "center",
+  alignItems: "center"
   }
 });
 
