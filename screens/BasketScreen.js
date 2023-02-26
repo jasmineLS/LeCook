@@ -46,7 +46,7 @@ const BasketScreen = ({navigation }) => {
         }}
       />
       <Pressable
-        onPress={() => navigation.navigate("Recipes", { basket: basket })}
+        onPress={() => navigation.navigate("RecipesStack", { basket: basket })}
       >
         <View styles={styles.find}>
         <Text style={styles.texts}>{basket.length?"Find a recipe!":"Please Add Items"}</Text>

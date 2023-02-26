@@ -4,7 +4,7 @@ import {useContext} from "react";
 import AppContext from '../AppContext';
 
 
-const RecipesScreen = ({route, navigation}) => {
+const RecipesScreen = ({route, navigation}, props) => {
   const myContext = useContext(AppContext);
   const {basket} = route.params;
   const [textInput, SetText] = useState("");
@@ -38,6 +38,7 @@ const RecipesScreen = ({route, navigation}) => {
         <Image source={{uri:recipe.image}}style={{"width":100,"height":100, borderRadius:10}}/>
         <Text style={{color:'white', fontSize:20, marginLeft:10, width:200,}} onPress={() => {Linking.openURL(recipe.url)}}>{recipe.label}</Text> 
         <Text style={{color:"white", fontSize:30, marginLeft:10}} onPress={()=>{myContext.updateSaved(JSON.stringify(recipe)); alert("Saved")}}>+</Text>
+        <Pressable onPress={() => navigation.navigate("Info", { recipe: recipe })}><Text style={{color:"white", marginBottom: 0}}>More Info</Text></Pressable>
       </View>
 
   );
@@ -88,6 +89,7 @@ const styles = StyleSheet.create({
     backgroundColor:'black',
     margin: 10,
     alignContent: 'center',
+    flexWrap: "wrap",
   },
 });
 
