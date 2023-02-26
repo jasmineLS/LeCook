@@ -1,7 +1,8 @@
-import { StyleSheet, Text, TextInput, View, FlatList,Image, Linking, Pressable} from "react-native";
+import { StyleSheet, Text, TextInput, View, FlatList,Image, Linking, Pressable,ScrollView,SafeAreaView} from "react-native";
 import { useState, useEffect } from "react";
 import {useContext} from "react";
 import AppContext from '../AppContext';
+
 
 const RecipesScreen = ({route, navigation}) => {
   const myContext = useContext(AppContext);
@@ -9,6 +10,8 @@ const RecipesScreen = ({route, navigation}) => {
   const [textInput, SetText] = useState("");
   const [data, setData] = useState([]);
   const [loading, SetLoading] = useState(true);
+  const [savedRecipes, setSavedRecipes] = useState("");
+  const [saved, setSaved] = useState(false);
   async function findRecipe() {
     console.log(basket)
     str="";
@@ -25,23 +28,25 @@ const RecipesScreen = ({route, navigation}) => {
     findRecipe()
   }, [])
 
-  const handleSaveItem = ()=>{
-
+  const handleSaveItem = (item)=>{
+    myContext.saveItem(json.stringify(item));
   }
 
   const Recipe = ({recipe}) =>(
+ 
       <View style ={styles.box}>
         <Image source={{uri:recipe.image}}style={{"width":100,"height":100, borderRadius:10}}/>
-        <Text style={{color:'white', fontSize:20, marginLeft:10, width:200}} onPress={() => {Linking.openURL(recipe.url)}}>{recipe.label}</Text> 
-        <Text style={{color:"white", fontSize:30}}>+</Text>
+        <Text style={{color:'white', fontSize:20, marginLeft:10, width:200,}} onPress={() => {Linking.openURL(recipe.url)}}>{recipe.label}</Text> 
+        <Text style={{color:"white", fontSize:30, marginLeft:20}} onPress={()=>{myContext.updateSaved(JSON.stringify(recipe)); alert("Saved")}}>+</Text>
       </View>
+
   );
 
   return (
     <View style ={styles.body}>
       <View style={styles.lists}>
-      {data.length>0?<FlatList data={data} style={{flex:1, alignSelf:'stretch', height:600}}
-          renderItem={({item})=><Recipe recipe={item.recipe} style={{flex:1, height:600}}/>}
+      {data.length>0?<FlatList data={data} style={{flex:3, length:1000, alignSelf:'stretch', marginBottom: 0,} }
+          renderItem={({item})=><Recipe recipe={item.recipe} style={{flex:2}}/>}
       />:<Text style ={styles.denied}>No found Recipes</Text>} 
       </View>
     </View>
@@ -62,14 +67,15 @@ const styles = StyleSheet.create({
   } ,
   body:{
     backgroundColor:'white',
-    flex:2,
-    height: 600,
+    flex:1,
+   
   } ,
   lists:{
     color:'#fff',
     padding: 10,
     height: 600,
-    margin: 10,
+    margin: 0,
+    flex:1,
    
   } ,
   box:{

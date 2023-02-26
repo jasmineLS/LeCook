@@ -12,7 +12,7 @@ const BasketScreen = ({navigation }) => {
   const [enteredText, setText] = useState("");
   const [basket, setBasket] = useState([]);
   const handleTextSubmit = () => {
-    setBasket([...basket, enteredText]);
+    enteredText.length>0?setBasket([...basket, enteredText]):alert("Please enter a valid item");
     setText("");
   };
 
@@ -49,7 +49,7 @@ const BasketScreen = ({navigation }) => {
         onPress={() => navigation.navigate("Recipes", { basket: basket })}
       >
         <View styles={styles.find}>
-        <Text style={styles.texts}>Find a recipe!</Text>
+        <Text style={styles.texts}>{basket.length?"Find a recipe!":"Please Add Items"}</Text>
         </View>
       </Pressable>
     </View>
