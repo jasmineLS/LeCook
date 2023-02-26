@@ -42,7 +42,7 @@ const RecipesScreen = ({route, navigation}) => {
       <View style={styles.lists}>
       {data.length>0?<FlatList data={data}
           renderItem={({item})=><Recipe recipe={item.recipe}/>}
-      />:<Text>No found Recipes</Text>} 
+      />:<Text style ={styles.denied}>No found Recipes</Text>} 
       </View>
     </View>
   );
@@ -77,7 +77,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontSize: 40
     
-  }
+  },
+  
+  
   
   
 
