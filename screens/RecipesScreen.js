@@ -1,7 +1,10 @@
-import { StyleSheet, Text, TextInput, View, FlatList,Image, Linking} from "react-native";
+import { StyleSheet, Text, TextInput, View, FlatList,Image, Linking, Pressable} from "react-native";
 import { useState, useEffect } from "react";
+import {useContext} from "react";
+import AppContext from '../AppContext';
 
 const RecipesScreen = ({route, navigation}) => {
+  const myContext = useContext(AppContext);
   const {basket} = route.params;
   const [textInput, SetText] = useState("");
   const [data, setData] = useState([]);
@@ -22,10 +25,15 @@ const RecipesScreen = ({route, navigation}) => {
     findRecipe()
   }, [])
 
+  const handleSaveItem = ()=>{
+
+  }
+
   const Recipe = ({recipe}) =>(
       <View style ={styles.box}>
           <Image source={{uri:recipe.image}}style={{"width":200,"height":100}}/>
           <Text onPress={() => {Linking.openURL(recipe.url)}}>{recipe.label}</Text>
+          <Pressable onPress={()=>myContext.updateSaved(recipe.label)}><Text>Click here!</Text></Pressable>
       </View>
   );
 
